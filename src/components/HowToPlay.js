@@ -26,7 +26,7 @@ const HowToPlay = () => {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete Customer
+              How to Play?
             </AlertDialogHeader>
 
             <AlertDialogBody>
