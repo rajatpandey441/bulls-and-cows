@@ -26,8 +26,6 @@ const NumButtons = ({ targetNum }) => {
       setIsDuplicate(true);
     } else {
       setIsDuplicate(false);
-      let BULL = -1;
-      let COW = -2;
       const numberByUser = [num1, num2, num3, num4].join("");
       //TODO:Write the logic for populating bull and cow variable
       //targetNum contains the random number generated at the start of the app
@@ -35,6 +33,11 @@ const NumButtons = ({ targetNum }) => {
       //numberByUser contains the number submitted by user
       //if you want to access the individual digits, use num1,num2,num3,num4
       //Write your code below
+
+      //console.log(targetNum);
+      let {BULL, COW} =  calculateBullsandCows(targetNum, numberByUser);
+      //let  BULL = calculateBulls(targetNum, numberByUser);
+      //let COW = calculateCows(targetNum, numberByUser)
 
       //Dont change anything for now below this line
       responseDispatch({
@@ -48,6 +51,24 @@ const NumButtons = ({ targetNum }) => {
       console.log(responses);
     }
   };
+  let calculateBullsandCows = (targetNum, guess) => {
+  let bulls = 0;
+  let cows = 0;
+
+  // Convert targetNum and guess to strings
+  targetNum = targetNum.toString();
+  guess = guess.toString();
+
+  for (let i = 0; i < 4; i++) {
+    if (targetNum[i] === guess[i]) {
+      bulls++;
+    } else if (targetNum.includes(guess[i])) {
+      cows++;
+    }
+  }
+  return  {BULL:bulls, COW:cows} ;
+};
+
   const isNumbersDuplicate = () => {
     const numArr = [num1, num2, num3, num4];
     if (numArr.length !== new Set(numArr).size) {
