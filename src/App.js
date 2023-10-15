@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Center,
+  ChakraProvider,
+  Container,
+  Heading,
+  Stack,
+} from "@chakra-ui/react";
+import NumButtons from "./components/NumButtons";
+import { ResponsesProvider } from "./context/responsesContext";
+import ResponseBox from "./components/ResponseBox";
+import { useEffect } from "react";
 
 function App() {
+  const randomNumber = Math.floor(Math.random() * 9000) + 1000;
+  useEffect(() => {}, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      <ResponsesProvider>
+        <Center h="100vh">
+          <Stack direction={"column"}>
+            <Heading>Bulls and Cows</Heading>
+            <NumButtons targetNum={randomNumber} />
+            <ResponseBox />
+          </Stack>
+        </Center>
+      </ResponsesProvider>
+    </ChakraProvider>
   );
 }
 
