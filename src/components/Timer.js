@@ -1,46 +1,37 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
-class Timer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      seconds: 0,
-      minutes: 0,
-      hours: 0,
-    };
-  }
+const Timer = () => {
+  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [hours, setHours] = useState(0);
 
-  componentDidMount() {
-    this.timerInterval = setInterval(this.tick, 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timerInterval);
-  }
-
-  tick = () => {
-    const { seconds, minutes, hours } = this.state;
-    if (seconds === 59) {
-      if (minutes === 59) {
-        this.setState({ hours: hours + 1, minutes: 0, seconds: 0 });
+  useEffect(() => {
+    const timerInterval = setInterval(() => {
+      if (seconds === 59) {
+        if (minutes === 59) {
+          setHours(hours + 1);
+          setMinutes(0);
+          setSeconds(0);
+        } else {
+          setMinutes(minutes + 1);
+          setSeconds(0);
+        }
       } else {
-        this.setState({ minutes: minutes + 1, seconds: 0 });
+        setSeconds(seconds + 1);
       }
-    } else {
-      this.setState({ seconds: seconds + 1 });
-    }
-  };
+    }, 1000);
 
-  render() {
-    const { hours, minutes, seconds } = this.state;
+    return () => clearInterval(timerInterval); // Cleanup on unmount
+  }, [seconds, minutes, hours]);
 
-    return (
-      <div>
-        <h2>Timer</h2>
-        <p>{String(hours).padStart(2, '0')}:{String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}</p>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h2>Timer</h2>
+      <p>
+        {String(hours).padStart(2, '0')}:{String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+      </p>
+    </div>
+  );
+};
 
 export default Timer;
