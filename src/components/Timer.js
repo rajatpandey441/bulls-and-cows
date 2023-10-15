@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from "react";
+import { ResponsesContext } from "../context/responsesContext";
 
 const Timer = () => {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
+  const { timeElapsedDispatch } = useContext(ResponsesContext);
 
   useEffect(() => {
     const timerInterval = setInterval(() => {
@@ -19,6 +21,10 @@ const Timer = () => {
       } else {
         setSeconds(seconds + 1);
       }
+      timeElapsedDispatch({
+        type: "updateTime",
+        payload: `${hours}:${minutes}:${seconds}`,
+      });
     }, 1000);
 
     return () => clearInterval(timerInterval); // Cleanup on unmount
@@ -28,7 +34,8 @@ const Timer = () => {
     <div>
       <h2>Timer</h2>
       <p>
-        {String(hours).padStart(2, '0')}:{String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+        {String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:
+        {String(seconds).padStart(2, "0")}
       </p>
     </div>
   );

@@ -8,7 +8,8 @@ const NumButtons = ({ targetNum }) => {
   const [num3, setNum3] = useState(0);
   const [num4, setNum4] = useState(0);
   const [isDuplicate, setIsDuplicate] = useState(true);
-  const { responses, responseDispatch } = useContext(ResponsesContext);
+  const { responses, responseDispatch, timeElapsed } =
+    useContext(ResponsesContext);
   useEffect(() => {
     if (isNumbersDuplicate()) {
       setIsDuplicate(true);
@@ -35,11 +36,11 @@ const NumButtons = ({ targetNum }) => {
       //Write your code below
 
       //console.log(targetNum);
-      let {BULL, COW} =  calculateBullsandCows(targetNum, numberByUser);
+      let { BULL, COW } = calculateBullsandCows(targetNum, numberByUser);
       //let  BULL = calculateBulls(targetNum, numberByUser);
       //let COW = calculateCows(targetNum, numberByUser)
       // IF BULLS == 4
-      // Winning function that displays time taken, attempts taken, average time per attempt 
+      // Winning function that displays time taken, attempts taken, average time per attempt
 
       //Dont change anything for now below this line
       responseDispatch({
@@ -51,25 +52,26 @@ const NumButtons = ({ targetNum }) => {
         },
       });
       console.log(responses);
+      console.log("time el ", timeElapsed);
     }
   };
   let calculateBullsandCows = (targetNum, guess) => {
-  let bulls = 0;
-  let cows = 0;
+    let bulls = 0;
+    let cows = 0;
 
-  // Convert targetNum and guess to strings
-  targetNum = targetNum.toString();
-  guess = guess.toString();
+    // Convert targetNum and guess to strings
+    targetNum = targetNum.toString();
+    guess = guess.toString();
 
-  for (let i = 0; i < 4; i++) {
-    if (targetNum[i] === guess[i]) {
-      bulls++;
-    } else if (targetNum.includes(guess[i])) {
-      cows++;
+    for (let i = 0; i < 4; i++) {
+      if (targetNum[i] === guess[i]) {
+        bulls++;
+      } else if (targetNum.includes(guess[i])) {
+        cows++;
+      }
     }
-  }
-  return  {BULL:bulls, COW:cows} ;
-};
+    return { BULL: bulls, COW: cows };
+  };
 
   const isNumbersDuplicate = () => {
     const numArr = [num1, num2, num3, num4];

@@ -8,12 +8,30 @@ const reducer = (state, action) => {
       return state;
   }
 };
+const initalTimeState = "";
+const timeReducer = (state, action) => {
+  switch (action.type) {
+    case "updateTime":
+      return action.payload;
+    default:
+      return state;
+  }
+};
 export const ResponsesContext = createContext();
 export const ResponsesProvider = ({ children }) => {
   const [responses, dispatch] = useReducer(reducer, initialState);
+  const [timeElapsed, timeElapsedDispatch] = useReducer(
+    timeReducer,
+    initalTimeState
+  );
   return (
     <ResponsesContext.Provider
-      value={{ responses, responseDispatch: dispatch }}
+      value={{
+        responses,
+        responseDispatch: dispatch,
+        timeElapsed,
+        timeElapsedDispatch,
+      }}
     >
       {children}
     </ResponsesContext.Provider>
