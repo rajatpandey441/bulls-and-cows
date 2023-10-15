@@ -38,6 +38,8 @@ const NumButtons = ({ targetNum }) => {
       let {BULL, COW} =  calculateBullsandCows(targetNum, numberByUser);
       //let  BULL = calculateBulls(targetNum, numberByUser);
       //let COW = calculateCows(targetNum, numberByUser)
+      // IF BULLS == 4
+      // Winning function that displays time taken, attempts taken, average time per attempt 
 
       //Dont change anything for now below this line
       responseDispatch({
