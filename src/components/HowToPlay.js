@@ -32,7 +32,9 @@ const HowToPlay = () => {
             <AlertDialogBody>
               Discover the hidden code! Click, or use arrow keys, to change your
               guess in each box. Bulls = correct code, correct position. Cows =
-              correct code, wrong position.
+              correct code, wrong position. For example,if hidden code is 2145 and 
+              the number you guessed is 1246 then bulls would be 1 and cows would be 
+              2.
             </AlertDialogBody>
 
             <AlertDialogFooter>
