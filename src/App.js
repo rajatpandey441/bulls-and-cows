@@ -18,18 +18,17 @@ import { useEffect } from "react";
 import HowToPlay from "./components/HowToPlay";
 
 function generateUniqueFourDigitNumber() {
-  let digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  let number = '';
-  
+  let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  let number = "";
+
   for (let i = 0; i < 4; i++) {
-      let index = Math.floor(Math.random() * digits.length);
-      number += digits[index];
-      digits.splice(index, 1);
+    let index = Math.floor(Math.random() * digits.length);
+    number += digits[index];
+    digits.splice(index, 1);
   }
   console.log(number);
   return parseInt(number);
 }
-
 
 function App() {
   const randomNumber = generateUniqueFourDigitNumber();
@@ -38,7 +37,11 @@ function App() {
     <ChakraProvider>
       <ResponsesProvider>
         <Flex h="100vh">
-          <Box w="70px" h="10">
+          <Box
+            w="70px"
+            h="10"
+            sx={{ paddingTop: "200px", paddingLeft: "150px" }}
+          >
             <HowToPlay />
           </Box>
           <Spacer />
@@ -54,7 +57,13 @@ function App() {
             </Center>
           </Box>
           <Spacer />
-          <Box w="180px" h="10" bg="red.500"></Box>
+          <Box
+            w="180px"
+            h="10"
+            sx={{ paddingTop: "200px", paddingRight: "150px" }}
+          >
+            Timer
+          </Box>
         </Flex>
       </ResponsesProvider>
     </ChakraProvider>
