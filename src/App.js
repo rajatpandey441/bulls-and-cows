@@ -18,6 +18,7 @@ import ResponseBox from "./components/ResponseBox";
 import { useEffect } from "react";
 import HowToPlay from "./components/HowToPlay";
 import Timer from "./components/Timer";
+import Giveup from "./components/Giveup";
 
 function generateUniqueFourDigitNumber() {
   let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -62,22 +63,36 @@ function App() {
           <Spacer />
           <Box p={1}>
             <Center h="100vh">
+              
+
               <Stack direction={"column"} gap={4}>
+                <Box
+                    borderWidth="1px"
+                    borderRadius="md"
+                    p={4}
+                    boxShadow="lg"
+                  >
                 <Box>
                   <Heading color={"white"}>Bulls and Cows</Heading>
                 </Box>
                 <Box>
                   <NumButtons targetNum={randomNumber} />
                 </Box>
+                </Box>
                 <Box sx={{ marginTop: -3 }}>
                   <ResponseBox />
                 </Box>
               </Stack>
+              
             </Center>
           </Box>
           <Spacer />
           <Box w="360px" h="10" sx={{ paddingRight: "150px" }}>
-            <Timer />
+            <Stack dir={"column"}>
+              <Timer />
+              <Giveup targetNum={randomNumber} />
+            </Stack>
+            
           </Box>
         </Flex>
       </ResponsesProvider>
