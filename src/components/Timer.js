@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ResponsesContext } from "../context/responsesContext";
+import { Box, Heading, Text } from "@chakra-ui/react";
 
 const Timer = () => {
   const [seconds, setSeconds] = useState(0);
@@ -31,13 +32,26 @@ const Timer = () => {
   }, [seconds, minutes, hours]);
 
   return (
-    <div>
-      <h2>Timer</h2>
-      <p>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      p={5}
+      borderRadius="lg"
+      boxShadow="lg"
+      bgGradient="linear(to-r, blue.600, blue.900)"
+      color="white"
+      width="fit-content"
+    >
+      <Heading as="h2" size="lg" mb={4}>
+        Timer
+      </Heading>
+      <Text fontSize="2xl" fontWeight="bold">
         {String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:
         {String(seconds).padStart(2, "0")}
-      </p>
-    </div>
+      </Text>
+    </Box>
   );
 };
 

@@ -10,6 +10,7 @@ import {
   Heading,
   Spacer,
   Stack,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import NumButtons from "./components/NumButtons";
 import { ResponsesProvider } from "./context/responsesContext";
@@ -28,42 +29,55 @@ function generateUniqueFourDigitNumber() {
     digits.splice(index, 1);
   }
   console.log(number);
-  return parseInt(number);
+  return number;
 }
 
 function App() {
   const randomNumber = generateUniqueFourDigitNumber();
   useEffect(() => {}, []);
+  const bgImage =
+    "url('https://images.pexels.com/photos/139399/bull-landscape-nature-mammal-139399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+  const bgColor = useColorModeValue("gr.200", "gray.700");
+  const textColor = useColorModeValue("white.700", "gray.200");
   return (
     <ChakraProvider>
       <ResponsesProvider>
-        <Flex h="100vh">
-          <Box
-            w="70px"
-            h="10"
-            sx={{ paddingTop: "200px", paddingLeft: "150px" }}
-          >
+        <Flex
+          height="100vh"
+          alignItems="center"
+          justifyContent="center"
+          bgImage={bgImage}
+          bgPos="center"
+          bgSize="cover"
+          bgBlendMode="overlay"
+        >
+          <Box w="70px" h="10" sx={{ paddingLeft: "150px" }}>
             <HowToPlay />
           </Box>
           <Spacer />
+          <Spacer />
+          <Spacer />
+          <Spacer />
+          <Spacer />
+          <Spacer />
           <Box p={1}>
             <Center h="100vh">
-              <Stack direction={"column"}>
+              <Stack direction={"column"} gap={4}>
                 <Box>
-                  <Heading>Bulls and Cows</Heading>
+                  <Heading color={"white"}>Bulls and Cows</Heading>
+                </Box>
+                <Box>
                   <NumButtons targetNum={randomNumber} />
+                </Box>
+                <Box sx={{ marginTop: -3 }}>
                   <ResponseBox />
                 </Box>
               </Stack>
             </Center>
           </Box>
           <Spacer />
-          <Box
-            w="360px"
-            h="10"
-            sx={{ paddingTop: "200px", paddingRight: "150px" }}
-          >
-              <Timer/>
+          <Box w="360px" h="10" sx={{ paddingRight: "150px" }}>
+            <Timer />
           </Box>
         </Flex>
       </ResponsesProvider>

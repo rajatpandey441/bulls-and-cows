@@ -1,13 +1,24 @@
-import { Button, ButtonGroup, Stack, Text } from "@chakra-ui/react";
+import {
+  Button,
+  ButtonGroup,
+  Stack,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { ResponsesContext } from "../context/responsesContext";
+import PlayerWon from "./PlayerWon";
 
 const NumButtons = ({ targetNum }) => {
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
   const [num3, setNum3] = useState(0);
   const [num4, setNum4] = useState(0);
+  const [staticTime, setStaticTime] = useState("");
   const [isDuplicate, setIsDuplicate] = useState(true);
+  const [isPlayerWon, setIsPlayerWon] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
   const { responses, responseDispatch, timeElapsed } =
     useContext(ResponsesContext);
   useEffect(() => {
@@ -51,14 +62,18 @@ const NumButtons = ({ targetNum }) => {
           cow: COW,
         },
       });
-      console.log(responses);
+
       console.log("time el ", timeElapsed);
+      setStaticTime(timeElapsed);
+      if (BULL === 4) {
+        onOpen();
+      }
     }
   };
   let calculateBullsandCows = (targetNum, guess) => {
     let bulls = 0;
     let cows = 0;
-
+    console.log("target ", targetNum);
     // Convert targetNum and guess to strings
     targetNum = targetNum.toString();
     guess = guess.toString();
@@ -84,7 +99,7 @@ const NumButtons = ({ targetNum }) => {
 
   return (
     <>
-      <Stack direction={"row"}>
+      <Stack direction={"column"}>
         <ButtonGroup
           marginLeft={"auto"}
           marginRight={"auto"}
@@ -121,15 +136,29 @@ const NumButtons = ({ targetNum }) => {
           </Button>
         </ButtonGroup>
         {isDuplicate ? (
-          <Text fontSize="md" paddingTop={2} marginLeft={6} fontWeight={600}>
+          <Text
+            fontSize="md"
+            paddingTop={2}
+            margin={"auto"}
+            fontWeight={600}
+            sx={{ width: "50%" }}
+            color={"white"}
+          >
             No Duplicates allowed
           </Text>
         ) : (
-          <Button variant={"outline"} marginLeft={6} onClick={submit}>
+          <Button onClick={submit} sx={{ width: "50%" }} margin={"auto"}>
             Submit
           </Button>
         )}
       </Stack>
+      <PlayerWon
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+        timeElapsed={staticTime}
+        totalAttempt={responses.length}
+      />
     </>
   );
 };

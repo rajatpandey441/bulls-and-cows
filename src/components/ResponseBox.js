@@ -21,10 +21,12 @@ const ResponseBox = () => {
     <Box
       width={400}
       height={400}
-      bg="rgb(21,76,121)"
+      bgGradient="linear(to-r, #A67C52, #4D2E00)"
       boxShadow={"2xl"}
       rounded={"md"}
       marginTop={5}
+      maxHeight="400px"
+      overflowY="auto"
     >
       <TableContainer>
         <Table variant="simple">
