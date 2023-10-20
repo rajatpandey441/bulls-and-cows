@@ -42,7 +42,7 @@ const Timer = () => {
       boxShadow="lg"
       bgGradient="linear(to-r, blue.600, blue.900)"
       color="white"
-      width="fit-content"
+      width="150px"
     >
       <Heading as="h2" size="lg" mb={4}>
         Timer
