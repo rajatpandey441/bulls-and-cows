@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Box,
     Button,
@@ -8,6 +8,18 @@ import {
 
 const Giveup = ({targetNum}) => {
     const [gaveUp, setGaveUp] = useState(false);
+    useEffect(() => {
+        if (gaveUp === true) {
+          // Use setTimeout to reload the page after 5 seconds
+          const timeoutId = setTimeout(() => {
+            window.location.reload();
+          }, 5000);
+      
+          // Clear the timeout when the component unmounts
+          return () => clearTimeout(timeoutId);
+        }
+      }, [gaveUp]);
+      
     return (
         <Box
         display="flex"
