@@ -4,6 +4,9 @@ import {
   Stack,
   Text,
   useDisclosure,
+  Input,
+  Center,
+  Flex,
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { ResponsesContext } from "../context/responsesContext";
@@ -97,44 +100,66 @@ const NumButtons = ({ targetNum }) => {
     }
   };
 
+  // Function to update input values
+  const handleInputChange = (event, setNum) => {
+    let value = parseInt(event.target.value);
+    // Ensure the value is between 0 and 9
+    if (!isNaN(value) && value >= 0 && value <= 9) {
+      setNum(value);
+    }
+  };
+
+  const inputStyle = {
+    background: "#E5E5E5", // Set your desired background color
+    border: "1px solid #333", // Set your desired border style
+    borderRadius: "4px", // Set your desired border radius
+    padding: "0.5rem", // Set your desired padding
+    width: "40px", // Set your desired width
+  };
+
   return (
     <>
       <Stack direction={"column"}>
-        <ButtonGroup
-          marginLeft={"auto"}
-          marginRight={"auto"}
-          variant={"solid"}
-          spacing={"3"}
-        >
-          <Button
-            onClick={() => {
-              setNumState(setNum1);
-            }}
-          >
-            {num1}
-          </Button>
-          <Button
-            onClick={() => {
-              setNumState(setNum2);
-            }}
-          >
-            {num2}
-          </Button>
-          <Button
-            onClick={() => {
-              setNumState(setNum3);
-            }}
-          >
-            {num3}
-          </Button>
-          <Button
-            onClick={() => {
-              setNumState(setNum4);
-            }}
-          >
-            {num4}
-          </Button>
-        </ButtonGroup>
+        <Flex spacing={5}
+                alignItems="center"
+                justifyContent="center">
+          <Stack direction={"row"}>
+          
+            <Input
+              value={num1}
+              onChange={(event) => handleInputChange(event, setNum1)}
+              type="number"
+              min={0}
+              max={9}
+              style={inputStyle} // Apply the custom styles
+            />
+            <Input
+              value={num2}
+              onChange={(event) => handleInputChange(event, setNum2)}
+              type="number"
+              min={0}
+              max={9}
+              style={inputStyle} // Apply the custom styles
+            />
+            <Input
+              value={num3}
+              onChange={(event) => handleInputChange(event, setNum3)}
+              type="number"
+              min={0}
+              max={9}
+              style={inputStyle} // Apply the custom styles
+            />
+            <Input
+              value={num4}
+              onChange={(event) => handleInputChange(event, setNum4)}
+              type="number"
+              min={0}
+              max={9}
+              style={inputStyle} // Apply the custom styles
+            />
+          
+          </Stack>
+        </Flex>
         {isDuplicate ? (
           <Text
             fontSize="md"
@@ -162,5 +187,4 @@ const NumButtons = ({ targetNum }) => {
     </>
   );
 };
-
 export default NumButtons;

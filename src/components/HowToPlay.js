@@ -44,12 +44,18 @@ const HowToPlay = () => {
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Discover the hidden code! Click, or use arrow keys, to change your
-              guess in each box. Bulls = correct code, correct position. Cows =
-              correct code, wrong position. For example, if the hidden code is
-              "2145," and you guess "1246," the feedback would be: Bulls : 1,
-              the "1" in your guess is in the correct position. Cows: 2, the "2"
-              and "4" in your guess are correct but in the wrong positions.
+              Discover the hidden code! Type, use arrow keys, or scroll wheel to change your
+              guess in each box. 
+              <br />
+              <br />
+              Bulls = correct code, correct position. <br />
+              Cows = correct code, wrong position. <br />
+              <br />
+              <br />
+              For example, if the hidden code is "2145," and you guess "1246,"
+              the feedback would be: <br />
+              Bulls : 1, because the "1" in your guess is in the correct position. <br />
+              Cows: 2, because the "2" and "4" in your guess are correct but in the wrong positions.<br />
               <br />
               <br />
               You can use this feedback to make educated guesses and gradually

@@ -1,55 +1,70 @@
-import React, { useState, useEffect } from "react";
+import PlayerLose from "./PlayerLose";
+import React, { useContext, useEffect, useState } from "react";
+import { ResponsesContext } from "../context/responsesContext";
+
 import {
     Box,
     Button,
     Heading,
-    Stack
+    Stack,
+    useDisclosure,
   } from "@chakra-ui/react";
 
 const Giveup = ({targetNum}) => {
     const [gaveUp, setGaveUp] = useState(false);
+    const [staticTime, setStaticTime] = useState("");
+    const [isDuplicate, setIsDuplicate] = useState(true);
+    const [isPlayerWon, setIsPlayerWon] = useState(false);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const cancelRef = React.useRef();
+    const { responses, responseDispatch, timeElapsed } =
+      useContext(ResponsesContext);
+
     useEffect(() => {
-        if (gaveUp === true) {
-          // Use setTimeout to reload the page after 5 seconds
-          const timeoutId = setTimeout(() => {
-            window.location.reload();
-          }, 5000);
-      
-          // Clear the timeout when the component unmounts
-          return () => clearTimeout(timeoutId);
+        if (gaveUp) {
+          setStaticTime(timeElapsed);
+          onOpen(); // Open the alert when gaveUp is true
         }
-      }, [gaveUp]);
-      
+    }, [gaveUp, onOpen]);
+
+    useEffect(() => {
+        if (gaveUp) {
+            // Use setTimeout to reload the page after 5 seconds
+            const timeoutId = setTimeout(() => {
+                window.location.reload();
+            }, 5000);
+
+            // Clear the timeout when the component unmounts
+            return () => clearTimeout(timeoutId);
+        }
+    }, [gaveUp]);
+
     return (
         <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        p={5}
-        borderRadius="lg"
-        boxShadow="lg"
-        bgGradient="linear(to-r, blue.600, blue.900)"
-        color="white"
-        width="150px"
-      >
-        {!gaveUp &&
-        <Button onClick={()=>{setGaveUp(true);}}>
-            Give Up!
-        </Button>
-        }
-        {gaveUp &&
-            <Stack flexDirection="column">
-                <Heading as="h2" size="lg" mb={4}>
-                Target number: {targetNum}
-                </Heading>
-                <Button onClick={()=>{window.location.reload();}}>
-                    New Game
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            p={5}
+            borderRadius="lg"
+            boxShadow="lg"
+            bgGradient="linear(to-r, blue.600, blue.900)"
+            color="white"
+            width="150px"
+        >
+            {!gaveUp && (
+                <Button onClick={() => setGaveUp(true)}>
+                    Give Up!
                 </Button>
-            </Stack>
-            
-        }
-        
-    </Box>);
+            )}
+            <PlayerLose
+                isOpen={isOpen}
+                onOpen={onOpen}
+                onClose={onClose}
+                timeElapsed={staticTime}
+                totalAttempt={responses.length}
+            />
+        </Box>
+    );
 };
 export default Giveup;
