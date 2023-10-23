@@ -27,17 +27,7 @@ const Giveup = ({targetNum}) => {
         }
     }, [gaveUp, onOpen]);
 
-    useEffect(() => {
-        if (gaveUp) {
-            // Use setTimeout to reload the page after 5 seconds
-            const timeoutId = setTimeout(() => {
-                window.location.reload();
-            }, 5000);
 
-            // Clear the timeout when the component unmounts
-            return () => clearTimeout(timeoutId);
-        }
-    }, [gaveUp]);
 
     return (
         <Box
