@@ -5,25 +5,19 @@ import { ResponsesContext } from "../context/responsesContext";
 import {
     Box,
     Button,
-    Heading,
-    Stack,
     useDisclosure,
   } from "@chakra-ui/react";
 
 const Giveup = ({targetNum}) => {
     const [gaveUp, setGaveUp] = useState(false);
     const [staticTime, setStaticTime] = useState("");
-    const [isDuplicate, setIsDuplicate] = useState(true);
-    const [isPlayerWon, setIsPlayerWon] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const cancelRef = React.useRef();
-    const { responses, responseDispatch, timeElapsed } =
-      useContext(ResponsesContext);
+    const { responses, responseDispatch, timeElapsed } = useContext(ResponsesContext);
 
     useEffect(() => {
         if (gaveUp) {
           setStaticTime(timeElapsed);
-          onOpen(); // Open the alert when gaveUp is true
+          onOpen();
         }
     }, [gaveUp, onOpen]);
 

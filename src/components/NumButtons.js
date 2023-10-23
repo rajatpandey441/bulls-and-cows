@@ -1,11 +1,9 @@
 import {
   Button,
-  ButtonGroup,
   Stack,
   Text,
   useDisclosure,
   Input,
-  Center,
   Flex,
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
@@ -22,8 +20,7 @@ const NumButtons = ({ targetNum }) => {
   const [isPlayerWon, setIsPlayerWon] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
-  const { responses, responseDispatch, timeElapsed } =
-    useContext(ResponsesContext);
+  const { responses, responseDispatch, timeElapsed } = useContext(ResponsesContext);
   useEffect(() => {
     if (isNumbersDuplicate()) {
       setIsDuplicate(true);
@@ -100,21 +97,24 @@ const NumButtons = ({ targetNum }) => {
     }
   };
 
-  // Function to update input values
+  const isCombinationDuplicate = (combination) => {
+    return responses.some((response) => response.response === combination);
+  };
+
+
   const handleInputChange = (event, setNum) => {
     let value = parseInt(event.target.value);
-    // Ensure the value is between 0 and 9
     if (!isNaN(value) && value >= 0 && value <= 9) {
       setNum(value);
     }
   };
 
   const inputStyle = {
-    background: "#E5E5E5", // Set your desired background color
-    border: "1px solid #333", // Set your desired border style
-    borderRadius: "4px", // Set your desired border radius
-    padding: "0.5rem", // Set your desired padding
-    width: "40px", // Set your desired width
+    background: "#E5E5E5", 
+    border: "1px solid #333", 
+    borderRadius: "4px", 
+    padding: "0.5rem", 
+    width: "40px", 
   };
 
   return (
@@ -131,7 +131,7 @@ const NumButtons = ({ targetNum }) => {
               type="number"
               min={0}
               max={9}
-              style={inputStyle} // Apply the custom styles
+              style={inputStyle} 
             />
             <Input
               value={num2}
@@ -139,7 +139,7 @@ const NumButtons = ({ targetNum }) => {
               type="number"
               min={0}
               max={9}
-              style={inputStyle} // Apply the custom styles
+              style={inputStyle} 
             />
             <Input
               value={num3}
@@ -147,7 +147,7 @@ const NumButtons = ({ targetNum }) => {
               type="number"
               min={0}
               max={9}
-              style={inputStyle} // Apply the custom styles
+              style={inputStyle} 
             />
             <Input
               value={num4}
@@ -155,23 +155,36 @@ const NumButtons = ({ targetNum }) => {
               type="number"
               min={0}
               max={9}
-              style={inputStyle} // Apply the custom styles
+              style={inputStyle}
             />
           
           </Stack>
         </Flex>
-        {isDuplicate ? (
+        {isDuplicate ? ( // check for duplicate digits
           <Text
             fontSize="md"
             paddingTop={2}
             margin={"auto"}
             fontWeight={600}
-            sx={{ width: "50%" }}
+            sx={{ width: "75%" }}
             color={"white"}
           >
-            No Duplicates allowed
+            No Duplicate Digits Allowed
           </Text>
-        ) : (
+
+        ) :  isCombinationDuplicate([num1, num2, num3, num4].join("")) ? ( // check for duplicate guesses
+          <Text
+            fontSize="md"
+            paddingTop={2}
+            margin={"auto"}
+            fontWeight={600}
+            sx={{ width: "75%" }}
+            color={"white"}
+          >
+            No Duplicate Guesses Allowed
+          </Text>
+        )
+          : ( // submit if nothing wrong with guess
           <Button onClick={submit} sx={{ width: "50%" }} margin={"auto"}>
             Submit
           </Button>
