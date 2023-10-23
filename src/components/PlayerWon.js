@@ -23,7 +23,10 @@ const PlayerWon = ({
     <AlertDialog
       isOpen={isOpen}
       leastDestructiveRef={cancelRef}
-      onClose={onClose}
+      onClose={() => {
+        onClose();
+        window.location.reload();
+      }}
       bgGradient="linear(to-r, green.200, blue.200)"
     >
       <AlertDialogOverlay>
