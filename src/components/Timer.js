@@ -29,6 +29,7 @@ const Timer = () => {
     }, 1000);
 
     return () => clearInterval(timerInterval); // Cleanup on unmount
+    // eslint-disable-next-line
   }, [seconds, minutes, hours]);
 
   return (

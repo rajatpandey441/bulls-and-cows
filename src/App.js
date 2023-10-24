@@ -7,7 +7,6 @@ import {
   Heading,
   Spacer,
   Stack,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import NumButtons from "./components/NumButtons";
 import { ResponsesProvider } from "./context/responsesContext";
@@ -35,10 +34,9 @@ function App() {
   useEffect(() => {}, []);
   const bgImage =
     "url(' https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/upwk62304037-wikimedia-image.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=1248e34b04121d0c4d22ae280c5b5b84')";
-  const bgColor = useColorModeValue("gr.200", "gray.700");
-  const textColor = useColorModeValue("white.700", "gray.200");
-  
-  
+  //const bgColor = useColorModeValue("gr.200", "gray.700");
+  //const textColor = useColorModeValue("white.700", "gray.200");
+
   return (
     <ChakraProvider>
       <ResponsesProvider>
@@ -51,38 +49,29 @@ function App() {
           bgSize="cover"
           bgBlendMode="overlay"
         >
-          <Box p={1}  sx={{ paddingLeft: "150px" }}>
+          <Box p={1} sx={{ paddingLeft: "150px" }}>
             <HowToPlay />
           </Box>
 
-          <Spacer/>
+          <Spacer />
 
           <Box p={1}>
             <Center h="100vh">
-              
-
               <Stack direction={"column"} gap={4}>
-                <Box
-                    borderWidth="1px"
-                    borderRadius="md"
-                    p={4}
-                    boxShadow="lg"
-                  >
-                <Box>
-                  <Heading color={"white"}>Bulls and Cows</Heading>
-                </Box>
-                <Box>
-                  <NumButtons targetNum={randomNumber} />
-                </Box>
+                <Box borderWidth="1px" borderRadius="md" p={4} boxShadow="lg">
+                  <Box>
+                    <Heading color={"white"}>Bulls and Cows</Heading>
+                  </Box>
+                  <Box>
+                    <NumButtons targetNum={randomNumber} />
+                  </Box>
                 </Box>
                 <Box sx={{ marginTop: -3 }}>
                   <ResponseBox />
                 </Box>
               </Stack>
-              
             </Center>
           </Box>
-
 
           <Spacer />
 
@@ -92,9 +81,7 @@ function App() {
               <Giveup targetNum={randomNumber} />
             </Stack>
           </Box>
-
         </Flex>
-        
       </ResponsesProvider>
     </ChakraProvider>
   );

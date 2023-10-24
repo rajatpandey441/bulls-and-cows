@@ -17,22 +17,24 @@ const NumButtons = ({ targetNum }) => {
   const [num4, setNum4] = useState(0);
   const [staticTime, setStaticTime] = useState("");
   const [isDuplicate, setIsDuplicate] = useState(true);
-  const [isPlayerWon, setIsPlayerWon] = useState(false);
+  //const [isPlayerWon, setIsPlayerWon] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cancelRef = React.useRef();
-  const { responses, responseDispatch, timeElapsed } = useContext(ResponsesContext);
+  //const cancelRef = React.useRef();
+  const { responses, responseDispatch, timeElapsed } =
+    useContext(ResponsesContext);
   useEffect(() => {
     if (isNumbersDuplicate()) {
       setIsDuplicate(true);
     } else {
       setIsDuplicate(false);
     }
+    // eslint-disable-next-line
   }, [num1, num2, num3, num4]);
-  const setNumState = (setFunc) => {
-    setFunc((prev) => {
-      return prev < 9 ? prev + 1 : 0;
-    });
-  };
+  // const setNumState = (setFunc) => {
+  //   setFunc((prev) => {
+  //     return prev < 9 ? prev + 1 : 0;
+  //   });
+  // };
   const submit = () => {
     if (isNumbersDuplicate()) {
       setIsDuplicate(true);
@@ -101,7 +103,6 @@ const NumButtons = ({ targetNum }) => {
     return responses.some((response) => response.response === combination);
   };
 
-
   const handleInputChange = (event, setNum) => {
     let value = parseInt(event.target.value);
     if (!isNaN(value) && value >= 0 && value <= 9) {
@@ -110,28 +111,25 @@ const NumButtons = ({ targetNum }) => {
   };
 
   const inputStyle = {
-    background: "#E5E5E5", 
-    border: "1px solid #333", 
-    borderRadius: "4px", 
-    padding: "0.5rem", 
-    width: "40px", 
+    background: "#E5E5E5",
+    border: "1px solid #333",
+    borderRadius: "4px",
+    padding: "0.5rem",
+    width: "40px",
   };
 
   return (
     <>
       <Stack direction={"column"}>
-        <Flex spacing={5}
-                alignItems="center"
-                justifyContent="center">
+        <Flex spacing={5} alignItems="center" justifyContent="center">
           <Stack direction={"row"}>
-          
             <Input
               value={num1}
               onChange={(event) => handleInputChange(event, setNum1)}
               type="number"
               min={0}
               max={9}
-              style={inputStyle} 
+              style={inputStyle}
             />
             <Input
               value={num2}
@@ -139,7 +137,7 @@ const NumButtons = ({ targetNum }) => {
               type="number"
               min={0}
               max={9}
-              style={inputStyle} 
+              style={inputStyle}
             />
             <Input
               value={num3}
@@ -147,7 +145,7 @@ const NumButtons = ({ targetNum }) => {
               type="number"
               min={0}
               max={9}
-              style={inputStyle} 
+              style={inputStyle}
             />
             <Input
               value={num4}
@@ -157,7 +155,6 @@ const NumButtons = ({ targetNum }) => {
               max={9}
               style={inputStyle}
             />
-          
           </Stack>
         </Flex>
         {isDuplicate ? ( // check for duplicate digits
@@ -171,8 +168,7 @@ const NumButtons = ({ targetNum }) => {
           >
             No Duplicate Digits Allowed
           </Text>
-
-        ) :  isCombinationDuplicate([num1, num2, num3, num4].join("")) ? ( // check for duplicate guesses
+        ) : isCombinationDuplicate([num1, num2, num3, num4].join("")) ? ( // check for duplicate guesses
           <Text
             fontSize="md"
             paddingTop={2}
@@ -183,8 +179,8 @@ const NumButtons = ({ targetNum }) => {
           >
             No Duplicate Guesses Allowed
           </Text>
-        )
-          : ( // submit if nothing wrong with guess
+        ) : (
+          // submit if nothing wrong with guess
           <Button onClick={submit} sx={{ width: "50%" }} margin={"auto"}>
             Submit
           </Button>
