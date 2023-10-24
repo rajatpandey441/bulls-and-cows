@@ -9,13 +9,20 @@ No Duplicate Digits: The game enforces that the hidden code and player's guesses
 No Duplicate Guesses: the game does not allow the player to submit a guess they have tried before
 Instructions: Clear instructions on how to play the game are provided by selecting the “How to Play” box on Game’s UI .
 
-## Available Scripts
+## Technology stack used:
+ReactJS, Chakra UI, Netlify, Github
+     
+## Credits for third-party assets and code:
+ChakraUI - https://chakra-ui.com/
+Netlify - https://www.netlify.com/
+## Setup and deployment instructions
+1. Clone the repository
+2. Open the terminal in the main directory
+3. Enter "npm install"
+4. Enter "npm start"
 
-In the project directory, you can run:
 
-### `npm start`
-
-Runs the app in the development mode.\
+This will run the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
