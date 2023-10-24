@@ -35,6 +35,7 @@ const Giveup = ({ targetNum }) => {
       <PlayerLose
         isOpen={isOpen}
         onOpen={onOpen}
+        targetNum={targetNum}
         onClose={onClose}
         timeElapsed={staticTime}
         totalAttempt={responses.length}
