@@ -46,7 +46,7 @@ const PlayerLose = ({
               <Heading as="h1" size="2xl" color="white">
                 You Gave Up!
               </Heading>
-              <Heading as="h1" size="2xl" color="white">
+              <Heading as="h3" size="2xl" color="white">
                 Target Number: {targetNumber}
               </Heading>
               <Text fontSize="xl" color="white">
