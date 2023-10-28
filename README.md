@@ -1,3 +1,6 @@
+Game link: https://probulls.netlify.app/
+Report: https://docs.google.com/document/d/1_eNpB_rB_4eXu6S0QfCt4ojD6eZ0KBjeJNKcK8Sz368/edit?usp=sharing
+
 The Bulls and Cows game is a classic logic puzzle game where players aim to discover a hidden code of a  4 digit number . The game provides feedback in the form of "bulls" and "cows" to help players figure out the hidden code.
 
 ## Objective:
